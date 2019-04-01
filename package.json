@@ -1,6 +1,6 @@
 {
   "name": "postgrator-new",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple migration filename generator for postgrator.",
   "main": "main.js",
   "author": "Tahmid Sadik",
