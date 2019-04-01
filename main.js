@@ -37,5 +37,5 @@ readline.question(chalk.bold.yellow(`What's the purpose of this migration, sire?
 });
 
 module.exports = {
-  generateNewTemplate: generate
+  generateNewMigration: generate
 };
