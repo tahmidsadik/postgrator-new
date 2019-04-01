@@ -7,10 +7,10 @@ const defaultMigrationFolder = 'db-migrations';
 const migrationFolder = process.argv[2] || defaultMigrationFolder;
 
 const generate = (purpose, location) => {
-  const files = fs.readdirSync(path.resolve(location));
-  const highestNumber = (Math.max(...files.map(f => parseInt(f.split('.')[0], 10))) + 1)
-    .toString()
-    .padStart(defaultPadding, 0);
+  const files = fs.readdirSync(path.resolve(location)).filter(f => /[0-9]\.(do|undo)\..*\.sql/.test(f));
+  const highestNumber = files.length
+    ? (Math.max(...files.map(f => parseInt(f.split('.')[0], 10))) + 1).toString().padStart(defaultPadding, 0)
+    : `0`.padStart(defaultPadding, 0);
   const variations = ['do', 'undo'].map(
     v =>
       `${path.resolve(location)}/${highestNumber}.${v}.${purpose
