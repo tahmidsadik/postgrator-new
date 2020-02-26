@@ -16,5 +16,8 @@
     "eslint-plugin-prettier": "^3.0.1",
     "prettier": "^1.16.4",
     "prompts": "^2.2.1"
+  },
+  "scripts": {
+    "prepack": "cp ./main.js ./bin/postgrator-new.js"
   }
 }
