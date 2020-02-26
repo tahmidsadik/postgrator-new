@@ -5,9 +5,13 @@ const chalk = require('chalk');
 const defaultPadding = 4;
 const defaultMigrationFolder = 'db-migrations';
 const migrationFolder = process.argv[2] || defaultMigrationFolder;
+const fileExtension = process.argv[3] || 'sql';
 
 const generate = (purpose, location) => {
-  const files = fs.readdirSync(path.resolve(location)).filter(f => /[0-9]\.(do|undo)\..*\.sql/.test(f));
+  const files = fs.readdirSync(path.resolve(location)).filter(f => {
+    const rx = RegExp(`[0-9]\.(do|undo)\..*\.${fileExtension}`);
+    return rx.test(f);
+  });
   const highestNumber = files.length
     ? (Math.max(...files.map(f => parseInt(f.split('.')[0], 10))) + 1).toString().padStart(defaultPadding, 0)
     : `0`.padStart(defaultPadding, 0);
@@ -16,7 +20,7 @@ const generate = (purpose, location) => {
       `${path.resolve(location)}/${highestNumber}.${v}.${purpose
         .trim()
         .replace(/\s/g, '-')
-        .replace('.', '-')}.sql`
+        .replace('.', '-')}.${fileExtension}`
   );
 
   variations.forEach(f => {

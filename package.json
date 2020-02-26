@@ -1,6 +1,6 @@
 {
   "name": "postgrator-new",
-  "version": "0.1.6",
+  "version": "0.1.62",
   "description": "Simple migration filename generator for postgrator.",
   "main": "main.js",
   "author": "Tahmid Sadik",
@@ -19,5 +19,9 @@
   },
   "scripts": {
     "prepack": "cp ./main.js ./bin/postgrator-new.js"
+  },
+  "bin": {
+    "postgrator-new": "./main.js",
+    "mg:rename": "./index.js"
   }
 }
